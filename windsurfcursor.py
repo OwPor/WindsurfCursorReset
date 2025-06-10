@@ -33,9 +33,10 @@ def reset_windsurf():
     except Exception as e:
         return False, f"Error: Windsurf not found."
     
-    data["telemetry.machineId"] = generate_uuid(search="-", replace="") + generate_uuid(search="-", replace="")
-    data["telemetry.sqmId"] = "{" + generate_uuid(capitalize=True) + "}"
-    data["telemetry.devDeviceId"] = generate_uuid()
+    data["telemetry.machineId"] = os.urandom(32).hex()
+    data["telemetry.macMachineId"] = os.urandom(32).hex()
+    # data["telemetry.sqmId"] = "{" + generate_uuid(capitalize=True) + "}"
+    data["telemetry.devDeviceId"] = os.urandom(32).hex()
 
     try:
         with open(windsurf, 'w', encoding='utf-8') as file:
